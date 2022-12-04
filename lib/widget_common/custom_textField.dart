@@ -1,21 +1,30 @@
 import 'package:mart/consts/consts.dart';
 
-Widget customTextField() {
+Widget customTextField({
+  String? title,
+  String? hint,
+  TextEditingController? controller,
+}) {
   return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      email.text.color(redColor).fontFamily(semibold).size(16).make(),
+      title!.text.color(redColor).fontFamily(semibold).size(16).make(),
       5.heightBox,
       TextFormField(
-        decoration: const InputDecoration(
-            hintText: emailHint,
-            hintStyle: TextStyle(fontFamily: semibold, color: textfieldGrey),
-            isDense: true,
-            fillColor: lightGrey,
-            filled: true,
-            border: InputBorder.none,
-            focusedBorder:
-                OutlineInputBorder(borderSide: BorderSide(color: redColor))),
-      )
+        controller: controller,
+        decoration: InputDecoration(
+          hintText: hint,
+          hintStyle:
+              const TextStyle(fontFamily: semibold, color: textfieldGrey),
+          isDense: true,
+          fillColor: lightGrey,
+          filled: true,
+          border: InputBorder.none,
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: redColor),
+          ),
+        ),
+      ),
     ],
   );
 }
