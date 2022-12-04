@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mart/consts/consts.dart';
 import 'package:mart/views/auth/signup_screen.dart';
-import 'package:mart/widget_common/bg_widget.dart';
-import 'package:mart/widget_common/custom_btn.dart';
-import 'package:mart/widget_common/custom_textField.dart';
-import 'package:mart/widget_common/logo_widget.dart';
+import 'package:mart/views/home/home_screen.dart';
+import 'package:mart/widget/bg_widget.dart';
+import 'package:mart/widget/custom_btn.dart';
+import 'package:mart/widget/custom_textField.dart';
+import 'package:mart/widget/logo_widget.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -33,13 +34,12 @@ class LoginScreen extends StatelessWidget {
                     child: TextButton(
                         onPressed: () {}, child: forgetPassword.text.make())),
                 customButton(
-                        color: redColor,
-                        textColor: whiteColor,
-                        title: login,
-                        onpress: () {})
-                    .box
-                    .width(context.screenWidth - 50)
-                    .make(),
+                    color: redColor,
+                    textColor: whiteColor,
+                    title: login,
+                    onpress: () {
+                      Get.to(() => const HomeScreen());
+                    }).box.width(context.screenWidth - 50).make(),
                 5.heightBox,
                 createNewAccount.text.color(fontGrey).make(),
                 5.heightBox,

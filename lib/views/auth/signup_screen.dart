@@ -1,10 +1,16 @@
 import 'package:get/get.dart';
 import 'package:mart/consts/consts.dart';
-import 'package:mart/widget_common/widgets.dart';
+import 'package:mart/widget/widgets.dart';
 
-class Signup extends StatelessWidget {
+class Signup extends StatefulWidget {
   const Signup({super.key});
 
+  @override
+  State<Signup> createState() => _SignupState();
+}
+
+class _SignupState extends State<Signup> {
+  bool? isCheck = false;
   @override
   Widget build(BuildContext context) {
     return bgWidget(
@@ -31,9 +37,14 @@ class Signup extends StatelessWidget {
                 Row(
                   children: [
                     Checkbox(
-                        checkColor: redColor,
-                        value: false,
-                        onChanged: (newValue) {}),
+                        activeColor: redColor,
+                        checkColor: whiteColor,
+                        value: isCheck,
+                        onChanged: (newValue) {
+                          setState(() {
+                            isCheck = newValue;
+                          });
+                        }),
                     10.widthBox,
                     Expanded(
                       child: RichText(
@@ -42,28 +53,28 @@ class Signup extends StatelessWidget {
                           TextSpan(
                             text: "I agree to the ",
                             style: TextStyle(
-                              fontFamily: bold,
+                              fontFamily: regular,
                               color: fontGrey,
                             ),
                           ),
                           TextSpan(
                             text: terms,
                             style: TextStyle(
-                              fontFamily: bold,
+                              fontFamily: regular,
                               color: redColor,
                             ),
                           ),
                           TextSpan(
                             text: " & ",
                             style: TextStyle(
-                              fontFamily: bold,
+                              fontFamily: regular,
                               color: fontGrey,
                             ),
                           ),
                           TextSpan(
                             text: privacyPolicy,
                             style: TextStyle(
-                              fontFamily: bold,
+                              fontFamily: regular,
                               color: redColor,
                             ),
                           ),
@@ -74,7 +85,7 @@ class Signup extends StatelessWidget {
                 ),
                 10.heightBox,
                 customButton(
-                        color: redColor,
+                        color: isCheck == true ? redColor : lightGolden,
                         textColor: whiteColor,
                         title: signup,
                         onpress: () {})
