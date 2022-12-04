@@ -1,10 +1,10 @@
 import 'package:mart/consts/consts.dart';
 
 Widget customButton(
-    {VoidCallback? onpress, Color? pcolor, Color? textColor, String? title}) {
+    {VoidCallback? onpress, Color? color, Color? textColor, String? title}) {
   return ElevatedButton(
       style: ElevatedButton.styleFrom(
-          primary: pcolor, padding: const EdgeInsets.all(12)),
+          primary: color, padding: const EdgeInsets.all(12)),
       onPressed: () {
         onpress;
       },

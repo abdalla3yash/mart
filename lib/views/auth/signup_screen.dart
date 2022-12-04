@@ -1,12 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:mart/consts/consts.dart';
-import 'package:mart/widget_common/bg_widget.dart';
-import 'package:mart/widget_common/custom_btn.dart';
-import 'package:mart/widget_common/custom_textField.dart';
-import 'package:mart/widget_common/logo_widget.dart';
+import 'package:mart/widget_common/widgets.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class Signup extends StatelessWidget {
+  const Signup({super.key});
 
   @override
   Widget build(BuildContext context) {
