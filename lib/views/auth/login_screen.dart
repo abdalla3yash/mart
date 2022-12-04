@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mart/consts/consts.dart';
+import 'package:mart/views/auth/forget_password_screen.dart';
 import 'package:mart/views/auth/signup_screen.dart';
 import 'package:mart/views/home/Landing_screen.dart';
 import 'package:mart/views/home/home_screen.dart';
@@ -33,7 +34,10 @@ class LoginScreen extends StatelessWidget {
                 Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
-                        onPressed: () {}, child: forgetPassword.text.make())),
+                        onPressed: () {
+                          Get.to(() => const ForgetPassword());
+                        },
+                        child: forgetPassword.text.make())),
                 customButton(
                     color: redColor,
                     textColor: whiteColor,
