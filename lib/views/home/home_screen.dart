@@ -1,74 +1,51 @@
-import 'package:get/get.dart';
 import 'package:mart/consts/consts.dart';
-import 'package:mart/controllers/home_controller.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.put(HomeController());
-
-    var navBarItem = [
-      BottomNavigationBarItem(
-          icon: Image.asset(
-            icHome,
-            width: 26,
-          ),
-          label: home),
-      BottomNavigationBarItem(
-          icon: Image.asset(
-            icCategories,
-            width: 26,
-          ),
-          label: categories),
-      BottomNavigationBarItem(
-          icon: Image.asset(
-            icCart,
-            width: 26,
-          ),
-          label: cart),
-      BottomNavigationBarItem(
-          icon: Image.asset(
-            icProfile,
-            width: 26,
-          ),
-          label: account),
-    ];
-
-    var navBody = [
-      Container(
-        color: Colors.red,
-      ),
-      Container(color: Colors.blue),
-      Container(
-        color: Colors.yellow,
-      ),
-      Container(
-        color: Colors.limeAccent,
-      ),
-    ];
-
-    return Scaffold(
-      body: Column(
+    return Container(
+      padding: const EdgeInsets.all(12),
+      color: lightGrey,
+      width: context.screenWidth,
+      height: context.screenHeight,
+      child: SafeArea(
+          child: Column(
         children: [
-          Obx(() => Expanded(
-              child: navBody.elementAt(controller.currentNavIndex.value))),
+          Container(
+            alignment: Alignment.center,
+            height: 60,
+            color: lightGrey,
+            child: TextFormField(
+              decoration: const InputDecoration(
+                  suffixIcon: Icon(Icons.search),
+                  filled: true,
+                  fillColor: whiteColor,
+                  hintText: search,
+                  hintStyle: TextStyle(color: textfieldGrey)),
+            ),
+          ),
+          VxSwiper.builder(
+              aspectRatio: 16 / 9,
+              autoPlay: true,
+              height: 150,
+              enlargeCenterPage: true,
+              itemCount: sliderList.length,
+              itemBuilder: (context, index) {
+                return Container(
+                    child: Image.asset(
+                  sliderList[index],
+                  fit: BoxFit.cover,
+                )
+                        .box
+                        .rounded
+                        .clip(Clip.antiAlias)
+                        .margin(const EdgeInsets.symmetric(horizontal: 8))
+                        .make());
+              })
         ],
-      ),
-      bottomNavigationBar: Obx(
-        () => BottomNavigationBar(
-          currentIndex: controller.currentNavIndex.value,
-          items: navBarItem,
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: whiteColor,
-          selectedItemColor: redColor,
-          selectedLabelStyle: const TextStyle(fontFamily: semibold),
-          onTap: (value) {
-            controller.currentNavIndex.value = value;
-          },
-        ),
-      ),
+      )),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:mart/consts/consts.dart';
+import 'package:mart/views/home/Landing_screen.dart';
 import 'package:mart/widget/widgets.dart';
 
 class Signup extends StatefulWidget {
@@ -85,13 +86,12 @@ class _SignupState extends State<Signup> {
                 ),
                 10.heightBox,
                 customButton(
-                        color: isCheck == true ? redColor : lightGolden,
-                        textColor: whiteColor,
-                        title: signup,
-                        onpress: () {})
-                    .box
-                    .width(context.screenWidth - 50)
-                    .make(),
+                    color: isCheck == true ? redColor : lightGolden,
+                    textColor: whiteColor,
+                    title: signup,
+                    onpress: () {
+                      Get.to(() => LandingScreen());
+                    }).box.width(context.screenWidth - 50).make(),
                 10.heightBox,
                 RichText(
                   text: const TextSpan(

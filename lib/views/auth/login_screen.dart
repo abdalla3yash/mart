@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mart/consts/consts.dart';
 import 'package:mart/views/auth/signup_screen.dart';
+import 'package:mart/views/home/Landing_screen.dart';
 import 'package:mart/views/home/home_screen.dart';
 import 'package:mart/widget/bg_widget.dart';
 import 'package:mart/widget/custom_btn.dart';
@@ -38,7 +39,7 @@ class LoginScreen extends StatelessWidget {
                     textColor: whiteColor,
                     title: login,
                     onpress: () {
-                      Get.to(() => const HomeScreen());
+                      Get.to(() => const LandingScreen());
                     }).box.width(context.screenWidth - 50).make(),
                 5.heightBox,
                 createNewAccount.text.color(fontGrey).make(),
