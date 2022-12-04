@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mart/consts/consts.dart';
+import 'package:mart/views/auth/signup_screen.dart';
 import 'package:mart/widget_common/bg_widget.dart';
 import 'package:mart/widget_common/custom_btn.dart';
 import 'package:mart/widget_common/custom_textField.dart';
@@ -20,7 +22,7 @@ class LoginScreen extends StatelessWidget {
             appLogoWidget(),
             10.heightBox,
             "Log in to $appname".text.fontFamily(bold).white.size(22).make(),
-            15.heightBox,
+            30.heightBox,
             Column(
               children: [
                 customTextField(title: email, hint: emailHint),
@@ -42,13 +44,12 @@ class LoginScreen extends StatelessWidget {
                 createNewAccount.text.color(fontGrey).make(),
                 5.heightBox,
                 customButton(
-                        color: lightGolden,
-                        textColor: redColor,
-                        title: signup,
-                        onpress: () {})
-                    .box
-                    .width(context.screenWidth - 50)
-                    .make(),
+                    color: lightGolden,
+                    textColor: redColor,
+                    title: signup,
+                    onpress: () {
+                      Get.to(() => const Signup());
+                    }).box.width(context.screenWidth - 50).make(),
                 10.heightBox,
                 loginWith.text.color(fontGrey).make(),
                 5.heightBox,

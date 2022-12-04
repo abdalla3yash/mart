@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(backgroundColor: Colors.transparent),
         fontFamily: regular,
       ),
-      home: const LoginScreen(),
+      home: const SplashScreen(),
     );
   }
 }
