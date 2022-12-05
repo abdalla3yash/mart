@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mart/views/auth/login_screen.dart';
 import 'package:mart/views/splach/splach_screen.dart';
 import 'consts/consts.dart';
 

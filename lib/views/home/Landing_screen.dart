@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:get/get.dart';
 import 'package:mart/controllers/home_controller.dart';
 import 'package:mart/views/cart/cart_screen.dart';
@@ -26,10 +28,10 @@ class LandingScreen extends StatelessWidget {
     ];
 
     var navBody = [
-      HomeScreen(),
-      CategoriesScreen(),
-      CartScreen(),
-      ProfileScreen(),
+      const HomeScreen(),
+      const CategoriesScreen(),
+      const CartScreen(),
+      const ProfileScreen(),
     ];
 
     return Scaffold(

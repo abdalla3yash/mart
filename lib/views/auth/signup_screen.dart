@@ -90,7 +90,7 @@ class _SignupState extends State<Signup> {
                     textColor: whiteColor,
                     title: signup,
                     onpress: () {
-                      Get.to(() => LandingScreen());
+                      Get.to(() => const LandingScreen());
                     }).box.width(context.screenWidth - 50).make(),
                 10.heightBox,
                 RichText(

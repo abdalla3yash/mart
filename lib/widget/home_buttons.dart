@@ -6,7 +6,7 @@ Widget homeButtons(
     String? icon,
     String? title,
     VoidCallback? onpress}) {
-  return Container(
+  return SizedBox(
     width: width,
     height: height,
     child: Column(
@@ -16,9 +16,9 @@ Widget homeButtons(
           icon!,
           width: 26,
         ),
-        5.heightBox,
+        10.heightBox,
         title!.text.fontFamily(semibold).color(darkFontGrey).make()
       ],
-    ).box.rounded.white.make(),
+    ).box.rounded.white.shadowSm.make(),
   );
 }

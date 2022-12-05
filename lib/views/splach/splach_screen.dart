@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mart/consts/colors.dart';
 import 'package:mart/consts/consts.dart';
 import 'package:mart/views/auth/login_screen.dart';
 import 'package:mart/widget/logo_widget.dart';

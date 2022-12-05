@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:mart/consts/consts.dart';
 
 Widget customButton(

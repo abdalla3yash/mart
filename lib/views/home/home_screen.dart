@@ -47,15 +47,56 @@ class HomeScreen extends StatelessWidget {
               }),
           10.heightBox,
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: List.generate(
                 2,
                 (index) => homeButtons(
-                      height: context.screenHeight * 0.2,
+                      height: context.screenHeight * 0.15,
                       width: context.screenWidth / 2.5,
                       title: index == 0 ? todayDeal : flashSale,
                       icon: index == 0 ? icTodaysDeal : icFlashDeal,
                     )),
-          )
+          ),
+          10.heightBox,
+          VxSwiper.builder(
+              aspectRatio: 16 / 9,
+              autoPlay: true,
+              height: 150,
+              enlargeCenterPage: true,
+              itemCount: secondSliderList.length,
+              itemBuilder: (context, index) {
+                return Container(
+                    child: Image.asset(
+                  secondSliderList[index],
+                  fit: BoxFit.cover,
+                )
+                        .box
+                        .rounded
+                        .clip(Clip.antiAlias)
+                        .margin(const EdgeInsets.symmetric(horizontal: 8))
+                        .make());
+              }),
+          10.heightBox,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: List.generate(
+                3,
+                (index) => homeButtons(
+                      height: context.screenHeight * 0.13,
+                      width: context.screenWidth / 3.5,
+                      title: index == 0
+                          ? topCategories
+                          : index == 1
+                              ? topBrand
+                              : topSeller,
+                      icon: index == 0
+                          ? icTopCategories
+                          : index == 1
+                              ? icBrands
+                              : icTopSeller,
+                    )),
+          ),
+          10.heightBox,
         ],
       )),
     );
