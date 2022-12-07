@@ -89,21 +89,22 @@ class HomeScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: List.generate(
-                          3,
-                          (index) => homeButtons(
-                                height: context.screenHeight * 0.13,
-                                width: context.screenWidth / 3.5,
-                                title: index == 0
-                                    ? topCategories
-                                    : index == 1
-                                        ? topBrand
-                                        : topSeller,
-                                icon: index == 0
-                                    ? icTopCategories
-                                    : index == 1
-                                        ? icBrands
-                                        : icTopSeller,
-                              )),
+                        3,
+                        (index) => homeButtons(
+                          height: context.screenHeight * 0.13,
+                          width: context.screenWidth / 3.5,
+                          title: index == 0
+                              ? topCategories
+                              : index == 1
+                                  ? topBrand
+                                  : topSeller,
+                          icon: index == 0
+                              ? icTopCategories
+                              : index == 1
+                                  ? icBrands
+                                  : icTopSeller,
+                        ),
+                      ),
                     ),
                     10.heightBox,
                     Align(
@@ -133,8 +134,47 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                        ),
+                        ).toList(),
                       ),
+                    ),
+                    20.heightBox,
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      width: double.infinity,
+                      decoration: const BoxDecoration(color: redColor),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            featuredProduct.text.white
+                                .fontFamily(bold)
+                                .size(18)
+                                .make(),
+                            10.heightBox,
+                            Row(
+                              children: List.generate(
+                                  6,
+                                  (index) => Column(
+                                        children: [
+                                          Image.asset(
+                                            imgP1,
+                                            width: 150,
+                                            fit: BoxFit.cover,
+                                          ),
+                                          10.heightBox,
+                                          "Laptop 4GB/64GB"
+                                              .text
+                                              .fontFamily(semibold)
+                                              .light
+                                              .make(),
+                                        ],
+                                      )
+                                          .box
+                                          .white
+                                          .rounded
+                                          .padding(const EdgeInsets.all(8))
+                                          .make()),
+                            )
+                          ]),
                     )
                   ],
                 ),
