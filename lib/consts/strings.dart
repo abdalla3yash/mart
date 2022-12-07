@@ -37,4 +37,5 @@ const search = "Search anything...",
     boysGlasses = "Boys Glasses",
     tshirts = "TShirts",
     girlsDress = "Girls Dress",
+    featuredProduct = "Featured Product",
     featuredCategories = "Featured Categories";
