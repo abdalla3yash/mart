@@ -19,13 +19,34 @@ class ItemDetailsScreen extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-              child: Container(
-            color: Colors.red,
+              child: Padding(
+            padding: EdgeInsets.all(8),
+            child: SingleChildScrollView(
+                child: Column(
+              children: [
+                VxSwiper.builder(
+                    autoPlay: true,
+                    height: 350,
+                    aspectRatio: 16 / 9,
+                    itemCount: 3,
+                    itemBuilder: (context, index) {
+                      return Image.asset(
+                        imgFc1,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      );
+                    })
+              ],
+            )),
           )),
           SizedBox(
             width: double.infinity,
+            height: 60,
             child: customButton(
-                color: redColor, textColor: whiteColor, title: "Add to Card",onpress: (){}),
+                color: redColor,
+                textColor: whiteColor,
+                title: "Add to Card",
+                onpress: () {}),
           )
         ],
       ),
