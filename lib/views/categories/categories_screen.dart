@@ -1,4 +1,6 @@
+import 'package:get/get.dart';
 import 'package:mart/consts/consts.dart';
+import 'package:mart/views/categories/category_details_screen.dart';
 import 'package:mart/widget/bg_widget.dart';
 
 class CategoriesScreen extends StatelessWidget {
@@ -35,7 +37,18 @@ class CategoriesScreen extends StatelessWidget {
                         .align(TextAlign.center)
                         .make(),
                   ],
-                ).box.white.rounded.clip(Clip.antiAlias).outerShadowSm.make();
+                )
+                    .box
+                    .white
+                    .rounded
+                    .clip(Clip.antiAlias)
+                    .outerShadowSm
+                    .make()
+                    .onTap(() {
+                  Get.to(
+                    CategoriesDetailsScreen(title: categoriesList[index]),
+                  );
+                });
               }),
         ),
       ),
