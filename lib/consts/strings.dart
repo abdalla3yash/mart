@@ -58,3 +58,6 @@ const video = "Video",
     supportPolicy = "Support Policy";
 
 const wishlist = "My Wishlist", orders = "My Orders", message = "Message";
+
+const loggedIn = "Logged In Successfully";
+const loggedOut = "Logged Out Successfully";

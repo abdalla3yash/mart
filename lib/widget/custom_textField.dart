@@ -6,6 +6,7 @@ Widget customTextField({
   String? title,
   String? hint,
   TextEditingController? controller,
+  bool? isPass,
 }) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -14,6 +15,7 @@ Widget customTextField({
       5.heightBox,
       TextFormField(
         controller: controller,
+        obscureText: isPass!,
         decoration: InputDecoration(
           hintText: hint,
           hintStyle:

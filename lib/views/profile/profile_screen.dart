@@ -1,5 +1,9 @@
+import 'package:get/get.dart';
 import 'package:mart/consts/consts.dart';
+import 'package:mart/controllers/auth_controller.dart';
+import 'package:mart/views/auth/login_screen.dart';
 import 'package:mart/views/profile/components/details_cart.dart';
+import 'package:mart/views/splach/splach_screen.dart';
 import 'package:mart/widget/bg_widget.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -42,7 +46,10 @@ class ProfileScreen extends StatelessWidget {
                   OutlinedButton(
                       style: OutlinedButton.styleFrom(
                           side: const BorderSide(color: whiteColor)),
-                      onPressed: () {},
+                      onPressed: () async {
+                        await Get.put(AuthController()).signoutMethod(context);
+                        Get.offAll(const LoginScreen());
+                      },
                       child: "Logout".text.fontFamily(semibold).white.make())
                 ],
               ),

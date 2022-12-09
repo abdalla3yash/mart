@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:mart/consts/consts.dart';
+import 'package:mart/controllers/auth_controller.dart';
 import 'package:mart/views/auth/forget_password_screen.dart';
 import 'package:mart/views/auth/signup_screen.dart';
 import 'package:mart/views/home/Landing_screen.dart';
@@ -13,6 +14,11 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(AuthController());
+
+    // text controllers
+    var emailController = TextEditingController();
+    var passwordController = TextEditingController();
     return bgWidget(
         child: Scaffold(
       resizeToAvoidBottomInset: false,
@@ -26,9 +32,17 @@ class LoginScreen extends StatelessWidget {
             30.heightBox,
             Column(
               children: [
-                customTextField(title: email, hint: emailHint),
+                customTextField(
+                    title: email,
+                    hint: emailHint,
+                    isPass: false,
+                    controller: emailController),
                 10.heightBox,
-                customTextField(title: password, hint: passwordHint),
+                customTextField(
+                    title: password,
+                    hint: passwordHint,
+                    isPass: true,
+                    controller: passwordController),
                 Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
