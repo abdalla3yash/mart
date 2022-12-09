@@ -15,10 +15,6 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = Get.put(AuthController());
-
-    // text controllers
-    var emailController = TextEditingController();
-    var passwordController = TextEditingController();
     return bgWidget(
         child: Scaffold(
       resizeToAvoidBottomInset: false,
@@ -36,13 +32,13 @@ class LoginScreen extends StatelessWidget {
                     title: email,
                     hint: emailHint,
                     isPass: false,
-                    controller: emailController),
+                    controller: controller.emailController),
                 10.heightBox,
                 customTextField(
                     title: password,
                     hint: passwordHint,
                     isPass: true,
-                    controller: passwordController),
+                    controller: controller.passwordController),
                 Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
@@ -54,8 +50,13 @@ class LoginScreen extends StatelessWidget {
                     color: redColor,
                     textColor: whiteColor,
                     title: login,
-                    onpress: () {
-                      Get.to(() => const LandingScreen());
+                    onpress: () async {
+                      await controller
+                          .loginMethod(context: context)
+                          .then((value) {
+                        VxToast.show(context, msg: loggedIn);
+                        Get.offAll(() => const LandingScreen());
+                      });
                     }).box.width(context.screenWidth - 50).make(),
                 5.heightBox,
                 createNewAccount.text.color(fontGrey).make(),
