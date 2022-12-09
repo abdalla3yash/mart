@@ -16,89 +16,101 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var controller = Get.put(AuthController());
     return bgWidget(
-        child: Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Center(
-        child: Column(
-          children: [
-            (context.screenHeight * 0.1).heightBox,
-            appLogoWidget(),
-            10.heightBox,
-            "Log in to $appname".text.fontFamily(bold).white.size(22).make(),
-            30.heightBox,
-            Column(
-              children: [
-                customTextField(
-                    title: email,
-                    hint: emailHint,
-                    isPass: false,
-                    controller: controller.emailController),
-                10.heightBox,
-                customTextField(
-                    title: password,
-                    hint: passwordHint,
-                    isPass: true,
-                    controller: controller.passwordController),
-                Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                        onPressed: () {
-                          Get.to(() => const ForgetPassword());
-                        },
-                        child: forgetPassword.text.make())),
-                customButton(
-                    color: redColor,
-                    textColor: whiteColor,
-                    title: login,
-                    onpress: () async {
-                      await controller
-                          .loginMethod(context: context)
-                          .then((value) {
-                        VxToast.show(context, msg: loggedIn);
-                        Get.offAll(() => const LandingScreen());
-                      });
-                    }).box.width(context.screenWidth - 50).make(),
-                5.heightBox,
-                createNewAccount.text.color(fontGrey).make(),
-                5.heightBox,
-                customButton(
-                    color: lightGolden,
-                    textColor: redColor,
-                    title: signup,
-                    onpress: () {
-                      Get.to(() => const Signup());
-                    }).box.width(context.screenWidth - 50).make(),
-                10.heightBox,
-                loginWith.text.color(fontGrey).make(),
-                5.heightBox,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(
-                      3,
-                      (index) => Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: CircleAvatar(
-                              backgroundColor: lightGrey,
-                              radius: 25,
-                              child: Image.asset(
-                                socialIconList[index],
-                                width: 30,
-                              ),
-                            ),
-                          )),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Center(
+          child: Column(
+            children: [
+              (context.screenHeight * 0.1).heightBox,
+              appLogoWidget(),
+              10.heightBox,
+              "Log in to $appname".text.fontFamily(bold).white.size(22).make(),
+              30.heightBox,
+              Obx(
+                () => Column(
+                  children: [
+                    customTextField(
+                        title: email,
+                        hint: emailHint,
+                        isPass: false,
+                        controller: controller.emailController),
+                    10.heightBox,
+                    customTextField(
+                        title: password,
+                        hint: passwordHint,
+                        isPass: true,
+                        controller: controller.passwordController),
+                    Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                            onPressed: () {
+                              Get.to(() => const ForgetPassword());
+                            },
+                            child: forgetPassword.text.make())),
+                    controller.isLoading.value
+                        ? const CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation(redColor),
+                          )
+                        : customButton(
+                            color: redColor,
+                            textColor: whiteColor,
+                            title: login,
+                            onpress: () async {
+                              controller.isLoading(true);
+                              await controller
+                                  .loginMethod(context: context)
+                                  .then((value) {
+                                if (value != null) {
+                                  VxToast.show(context, msg: loggedIn);
+                                  Get.offAll(() => const LandingScreen());
+                                } else {
+                                  controller.isLoading(false);
+                                }
+                              });
+                            }).box.width(context.screenWidth - 50).make(),
+                    5.heightBox,
+                    createNewAccount.text.color(fontGrey).make(),
+                    5.heightBox,
+                    customButton(
+                        color: lightGolden,
+                        textColor: redColor,
+                        title: signup,
+                        onpress: () {
+                          Get.to(() => const Signup());
+                        }).box.width(context.screenWidth - 50).make(),
+                    10.heightBox,
+                    loginWith.text.color(fontGrey).make(),
+                    5.heightBox,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(
+                          3,
+                          (index) => Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: CircleAvatar(
+                                  backgroundColor: lightGrey,
+                                  radius: 25,
+                                  child: Image.asset(
+                                    socialIconList[index],
+                                    width: 30,
+                                  ),
+                                ),
+                              )),
+                    ),
+                  ],
                 ),
-              ],
-            )
-                .box
-                .white
-                .rounded
-                .padding(const EdgeInsets.all(16))
-                .width(context.screenHeight - 70)
-                .shadowSm
-                .make(),
-          ],
+              )
+                  .box
+                  .white
+                  .rounded
+                  .padding(const EdgeInsets.all(16))
+                  .width(context.screenHeight - 70)
+                  .shadowSm
+                  .make(),
+            ],
+          ),
         ),
       ),
-    ));
+    );
   }
 }

@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:mart/consts/consts.dart';
 
 class AuthController extends GetxController {
+  var isLoading = false.obs;
+
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   // login method
