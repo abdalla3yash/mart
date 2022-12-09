@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:mart/consts/consts.dart';
 
 Widget DetailsCart({width, String? count, String? title}) {

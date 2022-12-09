@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:mart/consts/consts.dart';
 import 'package:mart/widget/custom_btn.dart';
 

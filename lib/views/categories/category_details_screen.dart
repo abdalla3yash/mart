@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:get/get.dart';
 import 'package:mart/consts/consts.dart';
 import 'package:mart/views/categories/item_details.dart';
