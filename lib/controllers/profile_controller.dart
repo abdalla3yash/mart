@@ -6,6 +6,9 @@ import 'package:mart/consts/consts.dart';
 class ProfileController extends GetxController {
   var profileImgPath = ''.obs;
 
+  var nameController = TextEditingController();
+  var passwordController = TextEditingController();
+  
   changeImage(context) async {
     try {
       final img = await ImagePicker()

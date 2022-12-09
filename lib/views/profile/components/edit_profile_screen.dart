@@ -3,15 +3,17 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:mart/consts/consts.dart';
 import 'package:mart/controllers/profile_controller.dart';
-import 'package:mart/widget/bg_widget.dart';
 import 'package:mart/widget/widgets.dart';
 
 class EditProfileScreen extends StatelessWidget {
-  const EditProfileScreen({super.key});
+  final dynamic data;
+  const EditProfileScreen({super.key, this.data});
 
   @override
   Widget build(BuildContext context) {
     var controller = Get.put(ProfileController());
+    controller.nameController.text = data['name'];
+    controller.passwordController.text = data['password'];
     return bgWidget(
       child: Scaffold(
         appBar: AppBar(),
@@ -41,11 +43,13 @@ class EditProfileScreen extends StatelessWidget {
               const Divider(),
               20.heightBox,
               customTextField(
+                controller: controller.nameController,
                 hint: nameHint,
                 title: name,
                 isPass: false,
               ),
               customTextField(
+                controller: controller.passwordController,
                 hint: passwordHint,
                 title: password,
                 isPass: true,
