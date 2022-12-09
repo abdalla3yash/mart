@@ -3,6 +3,7 @@ import 'package:mart/consts/consts.dart';
 import 'package:mart/controllers/auth_controller.dart';
 import 'package:mart/views/auth/login_screen.dart';
 import 'package:mart/views/profile/components/details_cart.dart';
+import 'package:mart/views/profile/components/edit_profile_screen.dart';
 import 'package:mart/views/splach/splach_screen.dart';
 import 'package:mart/widget/bg_widget.dart';
 
@@ -23,7 +24,9 @@ class ProfileScreen extends StatelessWidget {
                   child: const Icon(
                     Icons.edit,
                     color: whiteColor,
-                  ).onTap(() {})),
+                  ).onTap(() {
+                    Get.to(() => const EditProfileScreen());
+                  })),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
