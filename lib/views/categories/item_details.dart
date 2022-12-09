@@ -171,13 +171,13 @@ class ItemDetailsScreen extends StatelessWidget {
                     .text
                     .color(darkFontGrey)
                     .make(),
-
+                10.heightBox,
                 ListView(
                   shrinkWrap: true,
                   children: List.generate(
-                      5,
+                      itemDetailsButtonList.length,
                       (index) => ListTile(
-                            title: "Video"
+                            title: itemDetailsButtonList[index]
                                 .text
                                 .fontFamily(semibold)
                                 .color(darkFontGrey)
