@@ -174,6 +174,7 @@ class ItemDetailsScreen extends StatelessWidget {
                 10.heightBox,
                 ListView(
                   shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
                   children: List.generate(
                       itemDetailsButtonList.length,
                       (index) => ListTile(
@@ -184,7 +185,53 @@ class ItemDetailsScreen extends StatelessWidget {
                                 .make(),
                             trailing: const Icon(Icons.arrow_forward_sharp),
                           )),
-                )
+                ),
+                20.heightBox,
+                productsyoumayLike.text
+                    .fontFamily(bold)
+                    .size(16)
+                    .color(darkFontGrey)
+                    .make(),
+
+                20.heightBox,
+
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: List.generate(
+                        6,
+                        (index) => Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Image.asset(
+                                  imgP1,
+                                  width: 150,
+                                  fit: BoxFit.cover,
+                                ),
+                                10.heightBox,
+                                "Laptop 4GB/64GB"
+                                    .text
+                                    .fontFamily(semibold)
+                                    .color(darkFontGrey)
+                                    .make(),
+                                10.heightBox,
+                                "\$600"
+                                    .text
+                                    .color(redColor)
+                                    .fontFamily(bold)
+                                    .size(16)
+                                    .make(),
+                              ],
+                            )
+                                .box
+                                .white
+                                .roundedSM
+                                .margin(
+                                    const EdgeInsets.symmetric(horizontal: 4))
+                                .padding(const EdgeInsets.all(8))
+                                .make()),
+                  ),
+                ),
               ],
             )),
           )),
