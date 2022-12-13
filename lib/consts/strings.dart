@@ -61,3 +61,5 @@ const wishlist = "My Wishlist", orders = "My Orders", message = "Message";
 
 const loggedIn = "Logged In Successfully";
 const loggedOut = "Logged Out Successfully";
+const newPass = "New Password";
+const oldPass = "Old Password";
