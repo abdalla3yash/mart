@@ -8,7 +8,7 @@ class ItemDetailsScreen extends StatelessWidget {
   ItemDetailsScreen({super.key, required this.title});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     return Scaffold(
       backgroundColor: lightGrey,
       appBar: AppBar(
