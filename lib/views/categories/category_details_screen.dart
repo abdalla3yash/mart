@@ -2,6 +2,7 @@
 
 import 'package:get/get.dart';
 import 'package:mart/consts/consts.dart';
+import 'package:mart/controllers/product_controller.dart';
 import 'package:mart/views/categories/item_details.dart';
 import 'package:mart/widget/bg_widget.dart';
 
@@ -11,6 +12,7 @@ class CategoriesDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.find<ProductController>();
     return bgWidget(
       child: Scaffold(
         appBar: AppBar(
@@ -19,14 +21,15 @@ class CategoriesDetailsScreen extends StatelessWidget {
         body: Container(
           padding: const EdgeInsets.all(12),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: List.generate(
-                      6,
-                      (index) => "Baby Cloting"
+                      controller.subcat.length,
+                      (index) => "${controller.subcat[index]}"
                           .text
                           .size(12)
                           .fontFamily(semibold)

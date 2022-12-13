@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:mart/consts/consts.dart';
+import 'package:mart/controllers/product_controller.dart';
 import 'package:mart/views/categories/category_details_screen.dart';
 import 'package:mart/widget/bg_widget.dart';
 
@@ -8,6 +9,7 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(ProductController());
     return bgWidget(
       child: Scaffold(
         appBar: AppBar(title: categories.text.fontFamily(bold).white.make()),
@@ -45,6 +47,7 @@ class CategoriesScreen extends StatelessWidget {
                     .outerShadowSm
                     .make()
                     .onTap(() {
+                  controller.getSubCategories(categoriesList[index]);
                   Get.to(
                     CategoriesDetailsScreen(title: categoriesList[index]),
                   );
