@@ -34,25 +34,38 @@ class ProfileScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(right: 8, top: 8),
                     child: Align(
-                        alignment: Alignment.topRight,
-                        child: const Icon(
-                          Icons.edit,
-                          color: whiteColor,
-                        ).onTap(() {
-                          Get.to(() => EditProfileScreen(
-                                data: data,
-                              ));
-                        })),
+                      alignment: Alignment.topRight,
+                      child: const Icon(
+                        Icons.edit,
+                        color: whiteColor,
+                      ).onTap(
+                        () {
+                          controller.nameController.text = data['name'];
+                          controller.passwordController.text = data['password'];
+                          Get.to(
+                            () => EditProfileScreen(
+                              data: data,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Row(
                       children: [
-                        Image.asset(
-                          imgProfile,
-                          width: 100,
-                          fit: BoxFit.cover,
-                        ).box.roundedFull.clip(Clip.antiAlias).make(),
+                        data['image'] == ''
+                            ? Image.asset(
+                                imgProfile,
+                                width: 100,
+                                fit: BoxFit.cover,
+                              ).box.roundedFull.clip(Clip.antiAlias).make()
+                            : Image.asset(
+                                data['image'],
+                                width: 100,
+                                fit: BoxFit.cover,
+                              ).box.roundedFull.clip(Clip.antiAlias).make(),
                         5.heightBox,
                         Expanded(
                             child: Column(

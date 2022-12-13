@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:get/get.dart';
@@ -12,8 +14,6 @@ class EditProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = Get.put(ProfileController());
-    controller.nameController.text = data['name'];
-    controller.passwordController.text = data['password'];
     return bgWidget(
       child: Scaffold(
         appBar: AppBar(),
@@ -21,17 +21,23 @@ class EditProfileScreen extends StatelessWidget {
           () => Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              controller.profileImgPath.isEmpty
+              data['image'] && controller.profileImgPath.isEmpty
                   ? Image.asset(
                       imgProfile,
                       width: 100,
                       fit: BoxFit.cover,
                     ).box.roundedFull.clip(Clip.antiAlias).make()
-                  : Image.file(
-                      File(controller.profileImgPath.value),
-                      width: 100,
-                      fit: BoxFit.cover,
-                    ).box.roundedFull.clip(Clip.antiAlias).make(),
+                  : data['image'] && controller.profileImgPath.isEmpty
+                      ? Image.network(
+                          data['imageUrl'],
+                          width: 100,
+                          fit: BoxFit.cover,
+                        ).box.roundedFull.clip(Clip.antiAlias).make()
+                      : Image.file(
+                          File(controller.profileImgPath.value),
+                          width: 100,
+                          fit: BoxFit.cover,
+                        ).box.roundedFull.clip(Clip.antiAlias).make(),
               10.heightBox,
               customButton(
                   color: redColor,
@@ -55,15 +61,28 @@ class EditProfileScreen extends StatelessWidget {
                 isPass: true,
               ),
               20.heightBox,
-              SizedBox(
-                width: context.screenWidth - 60,
-                child: customButton(
-                  color: redColor,
-                  onpress: () {},
-                  textColor: whiteColor,
-                  title: "Save",
-                ),
-              ),
+              controller.isLoading.value
+                  ? const CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation(redColor),
+                    )
+                  : SizedBox(
+                      width: context.screenWidth - 60,
+                      child: customButton(
+                        color: redColor,
+                        onpress: () async {
+                          controller.isLoading(true);
+                          await controller.uploadProfileImage();
+                          await controller.updateProfile(
+                            imgUrl: controller.profileImageLink,
+                            name: controller.nameController.text,
+                            password: controller.passwordController.text,
+                          );
+                          VxToast.show(context, msg: "Updated");
+                        },
+                        textColor: whiteColor,
+                        title: "Save",
+                      ),
+                    ),
             ],
           )
               .box

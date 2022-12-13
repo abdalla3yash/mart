@@ -9,7 +9,6 @@ import 'package:path/path.dart';
 
 class ProfileController extends GetxController {
   var profileImgPath = ''.obs;
-
   var profileImageLink = '';
   var isLoading = false.obs;
   var nameController = TextEditingController();
