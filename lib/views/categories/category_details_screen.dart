@@ -28,11 +28,13 @@ class CategoriesDetailsScreen extends StatelessWidget {
               return Container(
                 child: LoadingIndicator(),
               );
-            } else if (snapshot.data!.docs.isEmpty) {
-              return Center(
-                child: "No Products Found!".text.color(darkFontGrey).make(),
-              );
-            } else {
+            }
+            //  else if (snapshot.data!.docs.isEmpty) {
+            //   return Center(
+            //     child: "No Products Found!".text.color(darkFontGrey).make(),
+            //   );
+            // }
+            else {
               var data = snapshot.data!.docs;
               return Container(
                 padding: const EdgeInsets.all(12),
