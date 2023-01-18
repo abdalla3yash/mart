@@ -104,79 +104,103 @@ class ItemDetailsScreen extends StatelessWidget {
 
                 // color section
                 20.heightBox,
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 100,
-                          child: "Color".text.color(textfieldGrey).make(),
-                        ),
-                        Row(
-                          children: List.generate(
-                              data['p_colors'].length,
-                              (index) => VxBox()
-                                  .size(40, 40)
-                                  .roundedFull
-                                  .color(Color(data['p_colors'][index])
-                                      .withOpacity(1.0))
-                                  .margin(
-                                      const EdgeInsets.symmetric(horizontal: 4))
-                                  .make()),
-                        ),
-                      ],
-                    ).box.padding(const EdgeInsets.all(8)).make(),
-                    // Quantity Section
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 100,
-                          child: "Quantity".text.color(textfieldGrey).make(),
-                        ),
-                        Obx(
-                          () => Row(
-                            children: [
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.remove),
-                              ),
-                              controller.quentity.value.text
-                                  .size(16)
-                                  .color(darkFontGrey)
-                                  .make(),
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.add),
-                              ),
-                              10.widthBox,
-                              "(${data['p_quentity']} available)"
-                                  .text
-                                  .size(16)
-                                  .color(darkFontGrey)
-                                  .make(),
-                            ],
+                Obx(
+                  () => Column(
+                    children: [
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 100,
+                            child: "Color".text.color(textfieldGrey).make(),
                           ),
-                        ),
-                      ],
-                    ).box.padding(const EdgeInsets.all(8)).make(),
+                          Row(
+                            children: List.generate(
+                                data['p_colors'].length,
+                                (index) => Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        VxBox()
+                                            .size(40, 40)
+                                            .roundedFull
+                                            .color(
+                                                Color(data['p_colors'][index])
+                                                    .withOpacity(1.0))
+                                            .margin(const EdgeInsets.symmetric(
+                                                horizontal: 4))
+                                            .make()
+                                            .onTap(() {
+                                          controller.changeColorIndex(index);
+                                        }),
+                                        Visibility(
+                                          visible: index ==
+                                              controller.colorIndex.value,
+                                          child: const Icon(
+                                            Icons.done,
+                                            color: Colors.white,
+                                          ),
+                                        )
+                                      ],
+                                    )),
+                          ),
+                        ],
+                      ).box.padding(const EdgeInsets.all(8)).make(),
+                      // Quantity Section
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 100,
+                            child: "Quantity".text.color(textfieldGrey).make(),
+                          ),
+                          Obx(
+                            () => Row(
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    controller.decreaseQuentity();
+                                  },
+                                  icon: const Icon(Icons.remove),
+                                ),
+                                controller.quentity.value.text
+                                    .size(16)
+                                    .color(darkFontGrey)
+                                    .make(),
+                                IconButton(
+                                  onPressed: () {
+                                    controller.increaseQuentity(
+                                        int.parse(data['p_quentity']));
+                                  },
+                                  icon: const Icon(Icons.add),
+                                ),
+                                10.widthBox,
+                                "(${data['p_quentity']} available)"
+                                    .text
+                                    .size(16)
+                                    .color(darkFontGrey)
+                                    .make(),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ).box.padding(const EdgeInsets.all(8)).make(),
 
-                    // total price Section
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 100,
-                          child: "Total".text.color(textfieldGrey).make(),
-                        ),
-                        "\$0.00"
-                            .text
-                            .size(16)
-                            .color(redColor)
-                            .fontFamily(bold)
-                            .make(),
-                      ],
-                    ).box.padding(const EdgeInsets.all(8)).make(),
-                  ],
-                ).box.white.shadow.make(),
+                      // total price Section
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 100,
+                            child: "Total".text.color(textfieldGrey).make(),
+                          ),
+                          "\$0.00"
+                              .text
+                              .size(16)
+                              .color(redColor)
+                              .fontFamily(bold)
+                              .make(),
+                        ],
+                      ).box.padding(const EdgeInsets.all(8)).make(),
+                    ],
+                  ).box.white.shadow.make(),
+                ),
 
                 // description Section
 

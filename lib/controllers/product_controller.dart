@@ -6,6 +6,7 @@ class ProductController extends GetxController {
   var subcat = [];
   var quentity = 0.obs;
   var colorIndex = 0.obs;
+  var totalPrice = 0.obs;
 
   getSubCategories(title) async {
     subcat.clear();
@@ -20,6 +21,18 @@ class ProductController extends GetxController {
   }
 
   changeColorIndex(index) {
-    colorIndex = index;
+    colorIndex.value = index;
+  }
+
+  increaseQuentity(totalQuentity) {
+    if (quentity.value < totalQuentity) {
+      quentity.value++;
+    }
+  }
+
+  decreaseQuentity() {
+    if (quentity.value > 0) {
+      quentity.value--;
+    }
   }
 }
