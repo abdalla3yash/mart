@@ -35,4 +35,8 @@ class ProductController extends GetxController {
       quentity.value--;
     }
   }
+
+  calculateTotalPrice(price) {
+    totalPrice.value = price * quentity.value;
+  }
 }

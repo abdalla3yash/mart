@@ -157,6 +157,8 @@ class ItemDetailsScreen extends StatelessWidget {
                                 IconButton(
                                   onPressed: () {
                                     controller.decreaseQuentity();
+                                    controller.calculateTotalPrice(
+                                        int.parse(data['p_price']));
                                   },
                                   icon: const Icon(Icons.remove),
                                 ),
@@ -168,6 +170,8 @@ class ItemDetailsScreen extends StatelessWidget {
                                   onPressed: () {
                                     controller.increaseQuentity(
                                         int.parse(data['p_quentity']));
+                                    controller.calculateTotalPrice(
+                                        int.parse(data['p_price']));
                                   },
                                   icon: const Icon(Icons.add),
                                 ),
@@ -190,7 +194,7 @@ class ItemDetailsScreen extends StatelessWidget {
                             width: 100,
                             child: "Total".text.color(textfieldGrey).make(),
                           ),
-                          "\$0.00"
+                          "\$${controller.totalPrice.value}"
                               .text
                               .size(16)
                               .color(redColor)
