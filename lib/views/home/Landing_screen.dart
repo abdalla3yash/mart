@@ -6,6 +6,7 @@ import 'package:mart/views/cart/cart_screen.dart';
 import 'package:mart/views/categories/categories_screen.dart';
 import 'package:mart/views/home/home_screen.dart';
 import 'package:mart/views/profile/profile_screen.dart';
+import 'package:mart/widget/exit_dialog.dart';
 
 import '../../consts/consts.dart';
 
@@ -34,27 +35,36 @@ class LandingScreen extends StatelessWidget {
       const ProfileScreen(),
     ];
 
-    return Scaffold(
-      body: Column(
-        children: [
-          Obx(
-            () => Expanded(
-              child: navBody.elementAt(controller.currentNavIndex.value),
+    return WillPopScope(
+      onWillPop: () async {
+        showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => ExitDialog(context));
+        return false;
+      },
+      child: Scaffold(
+        body: Column(
+          children: [
+            Obx(
+              () => Expanded(
+                child: navBody.elementAt(controller.currentNavIndex.value),
+              ),
             ),
+          ],
+        ),
+        bottomNavigationBar: Obx(
+          () => BottomNavigationBar(
+            currentIndex: controller.currentNavIndex.value,
+            items: navBarItem,
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: whiteColor,
+            selectedItemColor: redColor,
+            selectedLabelStyle: const TextStyle(fontFamily: semibold),
+            onTap: (value) {
+              controller.currentNavIndex.value = value;
+            },
           ),
-        ],
-      ),
-      bottomNavigationBar: Obx(
-        () => BottomNavigationBar(
-          currentIndex: controller.currentNavIndex.value,
-          items: navBarItem,
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: whiteColor,
-          selectedItemColor: redColor,
-          selectedLabelStyle: const TextStyle(fontFamily: semibold),
-          onTap: (value) {
-            controller.currentNavIndex.value = value;
-          },
         ),
       ),
     );
