@@ -24,17 +24,15 @@ class CategoriesDetailsScreen extends StatelessWidget {
         body: StreamBuilder(
           stream: FireStoreSercices.getProducts(title),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.hasData) {
+            if (!snapshot.hasData) {
               return Container(
                 child: LoadingIndicator(),
               );
-            }
-            //  else if (snapshot.data!.docs.isEmpty) {
-            //   return Center(
-            //     child: "No Products Found!".text.color(darkFontGrey).make(),
-            //   );
-            // }
-            else {
+            } else if (snapshot.data!.docs.isEmpty) {
+              return Center(
+                child: "No Products Found!".text.color(darkFontGrey).make(),
+              );
+            } else {
               var data = snapshot.data!.docs;
               return Container(
                 padding: const EdgeInsets.all(12),
@@ -78,19 +76,19 @@ class CategoriesDetailsScreen extends StatelessWidget {
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Image.asset(
-                                  imgP5,
+                                Image.network(
+                                  data[index]['p_imgs'][0],
                                   width: 150,
                                   height: 180,
                                   fit: BoxFit.cover,
                                 ),
-                                "Laptop 4GB/64GB"
+                                "${data[index]['p_name']}"
                                     .text
                                     .fontFamily(semibold)
                                     .color(darkFontGrey)
                                     .make(),
                                 10.heightBox,
-                                "\$600"
+                                "\$ ${data[index]['p_price']}"
                                     .text
                                     .color(redColor)
                                     .fontFamily(bold)
@@ -108,7 +106,7 @@ class CategoriesDetailsScreen extends StatelessWidget {
                                 .make()
                                 .onTap(() {
                               Get.to(() => ItemDetailsScreen(
-                                    title: "Dummy Item",
+                                    title: "${data[index]['p_name']}",
                                   ));
                             });
                           }),
