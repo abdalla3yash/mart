@@ -1,14 +1,18 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:get/get.dart';
 import 'package:mart/consts/consts.dart';
+import 'package:mart/controllers/product_controller.dart';
 import 'package:mart/widget/custom_btn.dart';
 
 class ItemDetailsScreen extends StatelessWidget {
   String? title;
-  ItemDetailsScreen({super.key, required this.title});
+  final dynamic data;
+  ItemDetailsScreen({super.key, required this.title, this.data});
 
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
+    var controller = Get.find<ProductController>();
     return Scaffold(
       backgroundColor: lightGrey,
       appBar: AppBar(
@@ -31,10 +35,11 @@ class ItemDetailsScreen extends StatelessWidget {
                     autoPlay: true,
                     height: 350,
                     aspectRatio: 16 / 9,
-                    itemCount: 3,
+                    itemCount: data['p_imgs'].length,
+                    viewportFraction: 1.0,
                     itemBuilder: (context, index) {
-                      return Image.asset(
-                        imgFc1,
+                      return Image.network(
+                        data['p_imgs'][index],
                         width: double.infinity,
                         fit: BoxFit.cover,
                       );
@@ -47,15 +52,22 @@ class ItemDetailsScreen extends StatelessWidget {
                     .make(),
                 10.heightBox,
                 VxRating(
+                  isSelectable: false,
+                  value: double.parse(data['p_rating']),
                   onRatingUpdate: (value) {},
                   normalColor: textfieldGrey,
                   selectionColor: golden,
                   count: 5,
                   size: 25,
-                  stepInt: true,
+                  maxRating: 5,
                 ),
                 10.heightBox,
-                "\$30.00".text.color(redColor).fontFamily(bold).size(18).make(),
+                "\$ ${data['p_price']}"
+                    .text
+                    .color(redColor)
+                    .fontFamily(bold)
+                    .size(18)
+                    .make(),
                 10.heightBox,
                 Row(
                   children: [
@@ -66,7 +78,7 @@ class ItemDetailsScreen extends StatelessWidget {
                       children: [
                         "Seller".text.white.fontFamily(semibold).make(),
                         5.heightBox,
-                        "Revin"
+                        "${data['p_seller']}"
                             .text
                             .white
                             .fontFamily(semibold)
@@ -102,11 +114,12 @@ class ItemDetailsScreen extends StatelessWidget {
                         ),
                         Row(
                           children: List.generate(
-                              5,
+                              data['p_colors'].length,
                               (index) => VxBox()
                                   .size(40, 40)
                                   .roundedFull
-                                  .color(Vx.randomPrimaryColor)
+                                  .color(Color(data['p_colors'][index])
+                                      .withOpacity(1.0))
                                   .margin(
                                       const EdgeInsets.symmetric(horizontal: 4))
                                   .make()),
@@ -120,24 +133,29 @@ class ItemDetailsScreen extends StatelessWidget {
                           width: 100,
                           child: "Quantity".text.color(textfieldGrey).make(),
                         ),
-                        Row(
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.remove),
-                            ),
-                            "0".text.size(16).color(darkFontGrey).make(),
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.add),
-                            ),
-                            10.widthBox,
-                            "0 available"
-                                .text
-                                .size(16)
-                                .color(darkFontGrey)
-                                .make(),
-                          ],
+                        Obx(
+                          () => Row(
+                            children: [
+                              IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.remove),
+                              ),
+                              controller.quentity.value.text
+                                  .size(16)
+                                  .color(darkFontGrey)
+                                  .make(),
+                              IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.add),
+                              ),
+                              10.widthBox,
+                              "(${data['p_quentity']} available)"
+                                  .text
+                                  .size(16)
+                                  .color(darkFontGrey)
+                                  .make(),
+                            ],
+                          ),
                         ),
                       ],
                     ).box.padding(const EdgeInsets.all(8)).make(),
@@ -169,10 +187,7 @@ class ItemDetailsScreen extends StatelessWidget {
                     .fontFamily(semibold)
                     .make(),
                 10.heightBox,
-                "This is a dummy data and dummy item description here ..."
-                    .text
-                    .color(darkFontGrey)
-                    .make(),
+                "${data['p_desc']}".text.color(darkFontGrey).make(),
                 10.heightBox,
                 ListView(
                   shrinkWrap: true,

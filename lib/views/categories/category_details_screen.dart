@@ -107,6 +107,7 @@ class CategoriesDetailsScreen extends StatelessWidget {
                                 .onTap(() {
                               Get.to(() => ItemDetailsScreen(
                                     title: "${data[index]['p_name']}",
+                                    data: data[index],
                                   ));
                             });
                           }),

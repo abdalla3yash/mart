@@ -4,6 +4,8 @@ import 'package:mart/models/category_Model.dart';
 
 class ProductController extends GetxController {
   var subcat = [];
+  var quentity = 0.obs;
+  var colorIndex = 0.obs;
 
   getSubCategories(title) async {
     subcat.clear();
@@ -15,5 +17,9 @@ class ProductController extends GetxController {
     for (var e in s[0].subcategories) {
       subcat.add(e);
     }
+  }
+
+  changeColorIndex(index) {
+    colorIndex = index;
   }
 }
