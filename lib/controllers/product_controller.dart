@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:mart/consts/consts.dart';
 import 'package:mart/models/category_Model.dart';
 
 class ProductController extends GetxController {
@@ -38,5 +39,25 @@ class ProductController extends GetxController {
 
   calculateTotalPrice(price) {
     totalPrice.value = price * quentity.value;
+  }
+
+  addToCart({title, img, sellername, color, qty, tprice, context}) async {
+    await firestore.collection(cartCollection).doc().set({
+      'title': title,
+      'img': img,
+      'sellername': sellername,
+      'color': color,
+      'qty': qty,
+      'tprice': tprice,
+      'added_by': currentUser!.uid
+    }).catchError((error) {
+      VxToast.show(context, msg: error.toString());
+    });
+  }
+
+  resetValues() {
+    totalPrice.value = 0;
+    quentity.value = 0;
+    colorIndex.value = 0;
   }
 }
