@@ -5,6 +5,12 @@ import 'package:mart/controllers/home_controller.dart';
 import 'package:path/path.dart';
 
 class ChatController extends GetxController {
+  @override
+  void onInit() {
+    getChatId();
+    super.onInit();
+  }
+
   var chats = firestore.collection(chatCollection);
   var friendName = Get.arguments[0];
   var friendId = Get.arguments[1];
@@ -36,5 +42,17 @@ class ChatController extends GetxController {
             });
           }
         });
+  }
+
+  sendMsg(String msg) {
+    if (msg.trim().isNotEmpty) {
+      var time = FieldValue.serverTimestamp();
+      chats.doc(chatDocId).update({
+        "created_on": time,
+        "last_msg": msg,
+        // "toId": friendId,
+        "fromId": currentId,
+      });
+    }
   }
 }

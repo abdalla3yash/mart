@@ -1,4 +1,6 @@
+import 'package:get/get.dart';
 import 'package:mart/consts/consts.dart';
+import 'package:mart/controllers/chat_controller.dart';
 import 'package:mart/views/chat/components/message_bubble.dart';
 
 class ChatScreen extends StatelessWidget {
@@ -6,6 +8,7 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(ChatController());
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: AppBar(
