@@ -3,6 +3,7 @@
 import 'package:get/get.dart';
 import 'package:mart/consts/consts.dart';
 import 'package:mart/controllers/product_controller.dart';
+import 'package:mart/views/chat/chat_screen.dart';
 import 'package:mart/widget/custom_btn.dart';
 
 class ItemDetailsScreen extends StatelessWidget {
@@ -104,7 +105,9 @@ class ItemDetailsScreen extends StatelessWidget {
                           Icons.message,
                           color: darkFontGrey,
                         ),
-                      )
+                      ).onTap(() {
+                        Get.to(() => const ChatScreen());
+                      }),
                     ],
                   )
                       .box
