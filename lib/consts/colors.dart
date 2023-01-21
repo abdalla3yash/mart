@@ -8,3 +8,5 @@ const Color lightGrey = Color.fromRGBO(239, 239, 239, 1);
 const Color redColor = Color.fromRGBO(230, 46, 4, 1);
 const Color golden = Color.fromRGBO(255, 168, 0, 1);
 const Color lightGolden = Color(0xFFFEEad1);
+const Color senderColor = Color(0xFFdb49e7);
+const Color reciverColor = Color(0xFF584df2);

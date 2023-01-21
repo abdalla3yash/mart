@@ -15,7 +15,12 @@ class ChatScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: AppBar(
-        title: "Title".text.fontFamily(semibold).color(darkFontGrey).make(),
+        title: '${controller.friendName}'
+            .text
+            .fontFamily(bold)
+            .size(20)
+            .color(darkFontGrey)
+            .make(),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -48,7 +53,11 @@ class ChatScreen extends StatelessWidget {
                             children: snapshot.data!.docs
                                 .mapIndexed((currentValue, index) {
                               var data = snapshot.data!.docs[index];
-                              return MessageBubble(data);
+                              return Align(
+                                  alignment: data['uid'] == currentUser!.uid
+                                      ? Alignment.centerRight
+                                      : Alignment.centerLeft,
+                                  child: MessageBubble(data));
                             }).toList(),
                           );
                         }

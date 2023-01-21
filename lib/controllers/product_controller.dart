@@ -60,4 +60,8 @@ class ProductController extends GetxController {
     quentity.value = 0;
     colorIndex.value = 0;
   }
+
+  addToWishlist()async{
+    
+  }
 }

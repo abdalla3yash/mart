@@ -47,14 +47,19 @@ class ChatController extends GetxController {
     isLoading(false);
   }
 
-  sendMsg(String msg) {
+  sendMsg(String msg) async {
     if (msg.trim().isNotEmpty) {
-      var time = FieldValue.serverTimestamp();
       chats.doc(chatDocId).update({
-        "created_on": time,
-        "last_msg": msg,
-        // "toId": friendId,
-        "fromId": currentId,
+        'created_on': FieldValue.serverTimestamp(),
+        'last_msg': msg,
+        'toId': friendId,
+        'fromId': currentId
+      });
+
+      chats.doc(chatDocId).collection(messageCollection).doc().set({
+        'created_on': FieldValue.serverTimestamp(),
+        'msg': msg,
+        'uid': currentId
       });
     }
   }
