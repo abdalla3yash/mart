@@ -18,9 +18,11 @@ class ChatController extends GetxController {
   var senderName = Get.find<HomeController>().username;
   var currentId = currentUser!.uid;
   var msgController = TextEditingController();
+  var isLoading = false.obs;
 
   dynamic chatDocId;
   getChatId() async {
+    isLoading(true);
     await chats
         .where("users", isEqualTo: {friendId: null, currentId: null})
         .limit(1)
@@ -42,6 +44,7 @@ class ChatController extends GetxController {
             });
           }
         });
+    isLoading(false);
   }
 
   sendMsg(String msg) {

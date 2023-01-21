@@ -22,31 +22,37 @@ class ChatScreen extends StatelessWidget {
         child: Column(
           children: [
             Obx(
-              () => Expanded(
-                  child: StreamBuilder(
-                stream: FireStoreSercices.getChatMessage(
-                    controller.chatDocId.toString()),
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
-                  if (!snapshot.hasData) {
-                    return Center(
+              () => controller.isLoading.value
+                  ? Center(
                       child: LoadingIndicator(),
-                    );
-                  } else if (snapshot.data!.docs.isEmpty) {
-                    return Center(
-                      child:
-                          "Send a message...".text.color(darkFontGrey).make(),
-                    );
-                  } else {
-                    return ListView(
-                      children: [
-                        MessageBubble(),
-                        MessageBubble(),
-                      ],
-                    );
-                  }
-                },
-              )),
+                    )
+                  : Expanded(
+                      child: StreamBuilder(
+                      stream: FireStoreSercices.getChatMessage(
+                          controller.chatDocId.toString()),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<QuerySnapshot> snapshot) {
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: LoadingIndicator(),
+                          );
+                        } else if (snapshot.data!.docs.isEmpty) {
+                          return Center(
+                            child: "Send a message..."
+                                .text
+                                .color(darkFontGrey)
+                                .make(),
+                          );
+                        } else {
+                          return ListView(
+                            children: [
+                              MessageBubble(),
+                              MessageBubble(),
+                            ],
+                          );
+                        }
+                      },
+                    )),
             ),
             10.heightBox,
             Row(
