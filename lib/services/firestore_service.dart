@@ -1,4 +1,3 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:mart/consts/consts.dart';
 
 class FireStoreSercices {
@@ -25,5 +24,14 @@ class FireStoreSercices {
 
   static deleteCartItem(docId) {
     return firestore.collection(cartCollection).doc(docId).delete();
+  }
+
+  static getChatMessage(docId) {
+    return firestore
+        .collection(chatCollection)
+        .doc(docId)
+        .collection(messageCollection)
+        .orderBy('created_on', descending: true)
+        .snapshots();
   }
 }

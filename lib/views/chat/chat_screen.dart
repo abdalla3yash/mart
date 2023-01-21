@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:mart/consts/consts.dart';
 import 'package:mart/controllers/chat_controller.dart';
+import 'package:mart/services/firestore_service.dart';
 import 'package:mart/views/chat/components/message_bubble.dart';
+import 'package:mart/widget/loading_indecator.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
@@ -18,24 +21,39 @@ class ChatScreen extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Expanded(
-              child: Container(
-                color: Colors.teal,
-                child: ListView(
-                  children: [
-                    MessageBubble(),
-                    MessageBubble(),
-                    MessageBubble(),
-                    MessageBubble(),
-                  ],
-                ),
-              ),
+            Obx(
+              () => Expanded(
+                  child: StreamBuilder(
+                stream: FireStoreSercices.getChatMessage(
+                    controller.chatDocId.toString()),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: LoadingIndicator(),
+                    );
+                  } else if (snapshot.data!.docs.isEmpty) {
+                    return Center(
+                      child:
+                          "Send a message...".text.color(darkFontGrey).make(),
+                    );
+                  } else {
+                    return ListView(
+                      children: [
+                        MessageBubble(),
+                        MessageBubble(),
+                      ],
+                    );
+                  }
+                },
+              )),
             ),
             10.heightBox,
             Row(
               children: [
                 Expanded(
                     child: TextFormField(
+                  controller: controller.msgController,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(
                         borderSide: BorderSide(color: textfieldGrey),
@@ -46,7 +64,10 @@ class ChatScreen extends StatelessWidget {
                       hintText: "Type a message..."),
                 )),
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      controller.sendMsg(controller.msgController.text);
+                      controller.msgController.clear();
+                    },
                     icon: const Icon(
                       Icons.send,
                       color: redColor,
