@@ -32,7 +32,15 @@ class ItemDetailsScreen extends StatelessWidget {
             actions: [
               IconButton(onPressed: () {}, icon: const Icon(Icons.share)),
               IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.favorite_outline)),
+                  onPressed: () {
+                    if (controller.isFav.value) {
+                      controller.removeFromWishlist(data.id, context);
+                    } else {
+                      controller.addToWishlist(data.id, context);
+                      controller.isFav(true);
+                    }
+                  },
+                  icon: const Icon(Icons.favorite_outline)),
             ]),
         body: Column(
           children: [
