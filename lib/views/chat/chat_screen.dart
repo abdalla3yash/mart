@@ -45,10 +45,11 @@ class ChatScreen extends StatelessWidget {
                           );
                         } else {
                           return ListView(
-                            children: [
-                              MessageBubble(),
-                              MessageBubble(),
-                            ],
+                            children: snapshot.data!.docs
+                                .mapIndexed((currentValue, index) {
+                              var data = snapshot.data!.docs[index];
+                              return MessageBubble(data);
+                            }).toList(),
                           );
                         }
                       },

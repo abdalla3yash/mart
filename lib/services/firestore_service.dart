@@ -34,4 +34,11 @@ class FireStoreSercices {
         .orderBy('created_on', descending: true)
         .snapshots();
   }
+
+  static getAllMessages() {
+    return firestore
+        .collection(chatCollection)
+        .where('fromId', isEqualTo: currentUser!.uid)
+        .snapshots();
+  }
 }

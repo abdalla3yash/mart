@@ -1,8 +1,13 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mart/consts/consts.dart';
+import 'package:intl/intl.dart' as intl;
 
-Widget MessageBubble() {
+Widget MessageBubble(DocumentSnapshot data) {
+  var date =
+      data['created_on'] == null ? DateTime.now() : data['created_on'].toDate();
+  var time = intl.DateFormat("h:mma").format(date);
   return Container(
     margin: const EdgeInsets.only(bottom: 8.0),
     padding: const EdgeInsets.all(5),
@@ -15,9 +20,9 @@ Widget MessageBubble() {
         )),
     child: Column(
       children: [
-        "Message here...".text.white.size(16).make(),
+        "${data['msg']}".text.white.size(16).make(),
         10.heightBox,
-        "11:35 PM".text.color(whiteColor.withOpacity(0.5)).make()
+        time.text.color(whiteColor.withOpacity(0.5)).make()
       ],
     ),
   );
